@@ -62,3 +62,24 @@ func TestUpdateEntry(t *testing.T) {
 	require.Equal(t, arg.ID, entryUpdate.ID)
 	require.Equal(t, arg.Amount, entryUpdate.Amount)
 }
+
+func TestListEntries(t *testing.T) {
+	accountTest := createRandomAccount(t)
+	for i := 0; i < 10; i++ {
+		CreateRandomEntry(t, accountTest)
+	}
+	arg := ListEntriesParams{
+		AccountID: accountTest.ID,
+		Limit: 5,
+		Offset: 5,
+	}
+	entries, err := testQueries.ListEntries(context.Background(), arg)
+	require.NoError(t, err)
+	require.Len(t, entries, 5)
+
+	for _, entry := range entries {
+		require.Equal(t, arg.AccountID, entry.AccountID)
+		require.NotEmpty(t, entry)
+	}
+
+}

@@ -20,5 +20,5 @@ OFFSET $3;
 -- name: UpdateEntry :one
 UPDATE entries
 SET amount = $2
-WHERE id = $1
+WHERE ID = $1
 RETURNING *;

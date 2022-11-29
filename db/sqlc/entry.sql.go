@@ -97,7 +97,7 @@ func (q *Queries) ListEntries(ctx context.Context, arg ListEntriesParams) ([]Ent
 const updateEntry = `-- name: UpdateEntry :one
 UPDATE entries
 SET amount = $2
-WHERE id = $1
+WHERE ID = $1
 RETURNING id, account_id, amount, created_at
 `
 
