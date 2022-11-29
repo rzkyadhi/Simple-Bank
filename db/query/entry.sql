@@ -16,3 +16,9 @@ WHERE account_id = $1
 ORDER BY id
 LIMIT $2
 OFFSET $3;
+
+-- name: UpdateEntry :one
+UPDATE entries
+SET amount = $2
+WHERE id = $1
+RETURNING *;
